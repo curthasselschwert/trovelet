@@ -15,18 +15,15 @@ var Signup = React.createClass({
 
     var email    = this.refs.email.getDOMNode().value.trim();
     var password = this.refs.password.getDOMNode().value.trim();
-    var user     = new Parse.User({ username: email, email: email, password: password });
 
-    console.log('User', user);
-
-    user.signUp(null, {
+    Parse.User.logIn(email, password, {
       success: this.handleSuccess,
       error: this.handleError
     });
   },
 
   handleSuccess: function(user) {
-    console.log('Success', user);
+    emitter.emit('navigate', '/' + user.id);
   },
 
   handleError: function(user, err) {

@@ -31,7 +31,6 @@ var Signup = React.createClass({
   handleError: function(user, err) {
     var message = error.get(err.message);
 
-    console.log('Error', message);
     this.setState({ error: message });
   },
 
