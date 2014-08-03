@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
-var Parse  = require('parse');
-var router = require('../router');
+var Parse   = require('parse');
+var emitter = require('../emitter');
 
-module.exports = function(ctx) {
+module.exports = function() {
   if (Parse.User.current()) {
     console.log('Logged in');
   } else {
-    router.show('/login');
+    emitter.emit('navigate', '/login');
   }
 }

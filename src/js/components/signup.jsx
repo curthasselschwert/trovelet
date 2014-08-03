@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
-var React = require('react');
-var error = require('../error-message');
+var React   = require('react');
+var error   = require('../error-message');
+var emitter = require('../emitter');
 
 var Signup = React.createClass({
 
@@ -34,6 +35,10 @@ var Signup = React.createClass({
     this.setState({ error: message });
   },
 
+  login: function() {
+    emitter.emit('navigate', '/login');
+  },
+
   render: function() {
     return (
       <div className="signup">
@@ -43,6 +48,9 @@ var Signup = React.createClass({
           <input className="password" type="password" ref="password" placeholder="password" />
           <button className="submit" type="submit">Sign Up</button>
         </form>
+        <p className="message">
+          Already have an account? Login <span onClick={ this.login }>here.</span>
+        </p>
       </div>
     );
   }

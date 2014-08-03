@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
-var React  = require('react');
-var Signup = require('../components/signup');
+var React = require('react');
+var Login = require('../components/login');
 
 module.exports = function(ctx) {
   React.renderComponent(
-    <Signup />,
+    <Login />,
     document.body
   );
 }
