@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
-var error = require('./error-message');
+var error = require('../error-message');
 
 var Signup = React.createClass({
 

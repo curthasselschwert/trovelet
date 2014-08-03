@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 var React = require('react');
-var error = require('./error-message');
+var error = require('../error-message');
 
-var Login = React.createClass({
+var Signup = React.createClass({
 
   getInitialState: function() {
     return { error: null };
@@ -13,8 +13,11 @@ var Login = React.createClass({
 
     var email    = this.refs.email.getDOMNode().value.trim();
     var password = this.refs.password.getDOMNode().value.trim();
+    var user     = new Parse.User({ username: email, email: email, password: password });
 
-    Parse.User.login(email, password, {
+    console.log('User', user);
+
+    user.signUp(null, {
       success: this.handleSuccess,
       error: this.handleError
     });
@@ -33,12 +36,12 @@ var Login = React.createClass({
 
   render: function() {
     return (
-      <div className="auth login">
+      <div className="signup">
         <form action="/" onSubmit={ this.handleSubmit }>
           <div className="error">{ this.state.error }</div>
           <input className="email" type="text" ref="email" placeholder="email" />
           <input className="password" type="password" ref="password" placeholder="password" />
-          <button className="submit" type="submit">Login</button>
+          <button className="submit" type="submit">Sign Up</button>
         </form>
       </div>
     );
@@ -46,4 +49,4 @@ var Login = React.createClass({
 
 });
 
-module.exports = Login;
+module.exports = Signup;
