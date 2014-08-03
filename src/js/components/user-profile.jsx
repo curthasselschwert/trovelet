@@ -1,13 +1,14 @@
 /** @jsx React.DOM */
-var React = require('react');
-var Parse = require('parse');
+var React     = require('react');
+var Parse     = require('parse');
+var PagesList = require('./pages-list');
 
 var UserProfile = React.createClass({
 
   getInitialState: function() {
-    return {
-      user: {}
-    }
+    var user = new Parse.User();
+
+    return { user: user };
   },
 
   componentDidMount: function() {
@@ -20,7 +21,7 @@ var UserProfile = React.createClass({
   },
 
   loadUser: function(response) {
-    this.setState({ user: response.attributes });
+    this.setState({ user: response });
   },
 
   error: function(error) {
@@ -28,9 +29,11 @@ var UserProfile = React.createClass({
   },
 
   render: function() {
+
     return (
       <div className="user-profile">
-        User Profile { this.state.user.email }
+        User Profile { this.state.user.attributes.email }
+        <PagesList user={ this.state.user } />
       </div>
     );
   }
