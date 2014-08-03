@@ -29,11 +29,12 @@ var UserProfile = React.createClass({
   },
 
   render: function() {
+    var user = this.state.user;
 
     return (
       <div className="user-profile">
-        User Profile { this.state.user.attributes.email }
-        <PagesList user={ this.state.user } />
+        User Profile { user.get('email') }
+        <PagesList user={ user } />
       </div>
     );
   }

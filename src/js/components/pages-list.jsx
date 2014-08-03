@@ -26,7 +26,11 @@ var PagesList = React.createClass({
 
   pages: function() {
     return this.state.pages.map(function(page) {
-      return <div className="page">{ page.attributes.title }</div>;
+      return (
+        <div key={ page.id } className="page">
+          { page.get('url') } | { page.updatedAt.toLocaleString() }
+        </div>
+      );
     });
   },
 
