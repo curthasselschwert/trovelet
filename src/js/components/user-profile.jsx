@@ -2,25 +2,25 @@
 var React     = require('react');
 var Parse     = require('parse');
 var PagesList = require('./pages-list');
+var AddPage   = require('./add-page');
 
 var UserProfile = React.createClass({
 
   getInitialState: function() {
-    var user = new Parse.User();
+    var user    = new Parse.User();
+    var current = new Parse.User.current();
 
-    return { user: user };
+    return { user: user, currentUser: current };
   },
 
   componentDidMount: function() {
     var query = new Parse.Query(Parse.User);
 
-    query.get(this.props.userid, {
-      success: this.loadUser,
-      error: this.error
-    });
+    query.get(this.props.userid)
+      .then(this.setUser, this.error);
   },
 
-  loadUser: function(response) {
+  setUser: function(response) {
     this.setState({ user: response });
   },
 
@@ -28,15 +28,35 @@ var UserProfile = React.createClass({
     console.error(error);
   },
 
-  render: function() {
+  addPage: function() {
+    var user    = this.state.user;
+    var current = this.state.currentUser;
+
+    if (user.id == current.id) {
+      return <AddPage />;
+    }
+
+    return null;
+  },
+
+  content: function() {
     var user = this.state.user;
 
-    return (
-      <div className="user-profile">
-        User Profile { user.get('email') }
-        <PagesList user={ user } />
-      </div>
-    );
+    if (user.id) {
+      return (
+        <div className="user-profile">
+          { user.get('email') }
+          { this.addPage() }
+          <PagesList user={ user } />
+        </div>
+      );
+    }
+
+    return <div>Loading...</div>;
+  },
+
+  render: function() {
+    return this.content();
   }
 
 });
