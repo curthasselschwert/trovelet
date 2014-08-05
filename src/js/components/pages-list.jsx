@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React      = require('react');
 var Parse      = require('parse');
-var DeletePage = require('./delete-page');
+var PageItem   = require('./page-item');
 var emitter    = require('../emitter');
 var url        = require('url');
 var moment     = require('moment');
@@ -9,7 +9,7 @@ var moment     = require('moment');
 var PagesList = React.createClass({
 
   getInitialState: function() {
-    return { pages: [], error: {}, limit: 5, count: 0, page: 1 };
+    return { pageIds: [], error: {}, limit: 10, count: 0, page: 1 };
   },
 
   componentDidMount: function() {
@@ -25,18 +25,19 @@ var PagesList = React.createClass({
     var limit  = this.state.limit;
     var offset = (this.state.page - 1) * this.state.limit;
 
-    if (user && user.id) {
-      query.equalTo('user', user);
-      query.descending('updatedAt');
-      query.limit(limit);
-      query.skip(offset);
-      query.find()
-        .then(this.handleSuccess, this.handleError);
-    }
+    query.equalTo('user', user);
+    query.descending('updatedAt');
+    query.limit(limit);
+    query.skip(offset);
+    query.select('id');
+    query.find()
+      .then(this.handleSuccess, this.handleError);
   },
 
   handleSuccess: function(pages) {
-    this.setState({ pages: pages });
+    var ids = pages.map(function(page) { return page.id });
+
+    this.setState({ pageIds: ids });
   },
 
   handleError: function(error) {
@@ -97,47 +98,19 @@ var PagesList = React.createClass({
   },
 
   pages: function() {
-    return this.state.pages.map(function(page) {
-      var date = moment(page.updatedAt).calendar();
-
-      return (
-        <tr key={ page.id } className="page">
-          <td>
-            <a href={ page.get('url') } target="_blank">{ page.get('title') }</a>
-          </td>
-          <td>
-            { page.get('summary') }
-          </td>
-          <td>
-            { url.parse(page.get('url')).hostname }
-          </td>
-          <td>
-            { date }
-          </td>
-          <td>
-            <DeletePage page={ page } />
-          </td>
-        </tr>
-      );
+    return this.state.pageIds.map(function(id) {
+      return <PageItem key={ id } id={ id } />;
     });
   },
 
   render: function() {
     return (
       <div className="pages-list">
-        <table className="pages">
-          { this.pages() }
-          <tfoot>
-            <tr>
-              <td colSpan="2">
-                { this.prevPage() }
-              </td>
-              <td colSpan="3">
-                { this.nextPage() }
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+        { this.pages() }
+        <div className="pagination">
+          { this.prevPage() }
+          { this.nextPage() }
+        </div>
       </div>
     )
   }

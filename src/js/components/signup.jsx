@@ -12,11 +12,15 @@ var Signup = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
 
+    var name     = this.refs.name.getDOMNode().value.trim();
     var email    = this.refs.email.getDOMNode().value.trim();
     var password = this.refs.password.getDOMNode().value.trim();
-    var user     = new Parse.User({ username: email, email: email, password: password });
-
-    console.log('User', user);
+    var user     = new Parse.User({
+      name: name,
+      username: email,
+      email: email,
+      password: password
+    });
 
     user.signUp(null, {
       success: this.handleSuccess,
@@ -25,7 +29,7 @@ var Signup = React.createClass({
   },
 
   handleSuccess: function(user) {
-    console.log('Success', user);
+    emitter.emit('navigate', '/' + user.id);
   },
 
   handleError: function(user, err) {
@@ -43,7 +47,8 @@ var Signup = React.createClass({
       <div className="signup">
         <form action="/" onSubmit={ this.handleSubmit }>
           <div className="error">{ this.state.error }</div>
-          <input className="email" type="text" ref="email" placeholder="email" />
+          <input className="name" type="text" ref="name" placeholder="Full Name" />
+          <input className="email" type="text" ref="email" placeholder="email@example.com" />
           <input className="password" type="password" ref="password" placeholder="password" />
           <button className="submit" type="submit">Sign Up</button>
         </form>
