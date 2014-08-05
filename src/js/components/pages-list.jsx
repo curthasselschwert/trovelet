@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
-var React   = require('react');
-var Parse   = require('parse');
-var emitter = require('../emitter');
-var url     = require('url');
-var moment  = require('moment');
+var React      = require('react');
+var Parse      = require('parse');
+var DeletePage = require('./delete-page');
+var emitter    = require('../emitter');
+var url        = require('url');
+var moment     = require('moment');
 
 var PagesList = React.createClass({
 
@@ -13,6 +14,7 @@ var PagesList = React.createClass({
 
   componentDidMount: function() {
     emitter.on('page added', this.pageAdded);
+    emitter.on('page deleted', this.updateList);
     this.updateList();
   },
 
@@ -112,6 +114,9 @@ var PagesList = React.createClass({
           <td>
             { date }
           </td>
+          <td>
+            <DeletePage page={ page } />
+          </td>
         </tr>
       );
     });
@@ -127,7 +132,7 @@ var PagesList = React.createClass({
               <td colSpan="2">
                 { this.prevPage() }
               </td>
-              <td colSpan="2">
+              <td colSpan="3">
                 { this.nextPage() }
               </td>
             </tr>
