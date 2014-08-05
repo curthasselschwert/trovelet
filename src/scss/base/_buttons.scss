@@ -1,0 +1,32 @@
+$c-button-base: hsl(0, 0, 70%) !default;
+$c-button-base-text: hsl(0, 0, 97%) !default;
+$c-button-primary: hsl(199, 92%, 57%) !default;
+
+@mixin button($color: $c-button-base, $text: hsl(0, 0, 97%)) {
+  background: $color;
+  border-radius: rem-calc(22);
+  box-shadow: 0 3px 2px darken($color, 15%);
+  color: $text;
+  display: inline-block;
+  font-size: rem-calc(22);
+  font-weight: 400;
+  height: rem-calc(44);
+  line-height: rem-calc(44);
+  padding: 0 20px;
+  position: relative;
+  text-decoration: none;
+
+  &:hover {
+    background: darken($color, 4%);
+    box-shadow: 0 2px 2px darken($color, 15%);
+    top: 1px;
+  }
+}
+
+.button {
+  @include button;
+}
+
+.button.primary {
+  @include button($c-button-primary);
+}

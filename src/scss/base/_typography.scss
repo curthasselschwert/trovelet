@@ -1,0 +1,44 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600|Open+Sans+Condensed:300);
+
+$t-open-sans: 'Open Sans', sans-serif;
+$t-open-sans-cond: 'Open Sans Condensed', sans-serif;
+
+$t-copy-font: $t-open-sans;
+$t-header-font: $t-open-sans;
+$t-header-alt-font: $t-open-sans-cond;
+
+@mixin t-heading-one {
+  font-family: $t-header-font;
+  font-size: rem-calc(28);
+  font-weight: 300;
+  line-height: rem-calc(36);
+  margin: rem-calc(6) auto;
+}
+
+@mixin t-heading-two {
+  font-family: $t-header-font;
+  font-size: rem-calc(23);
+  font-weight: 300;
+  line-height: rem-calc(32);
+  margin: rem-calc(8) auto;
+}
+
+@mixin t-heading-three {
+  font-family: $t-header-font;
+  font-size: rem-calc(20);
+  font-weight: 300;
+  line-height: rem-calc(32);
+  margin: rem-calc(8) 0;
+}
+
+body {
+  font-family: $t-copy-font;
+  font-size: $rem-base;
+  font-weight: 300;
+  line-height: $line-height;
+}
+
+em {
+  font-style: normal;
+  font-weight: 400;
+}

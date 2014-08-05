@@ -1,0 +1,18 @@
+$c-bright-blue: hsl(199, 92%, 57%);
+$c-steel-gray: hsl(199, 46%, 15%);
+$c-dark-gray: hsl(0, 0%, 36%);
+$c-near-white: hsl(0, 0, 97%);
+$c-light-gray: hsl(0, 0, 70%);
+$c-light-blue: hsl(199, 73%, 81%);
+$c-ultra-light-blue: hsl(201, 94%, 94%);
+
+$c-primary: $c-bright-blue;
+$c-accent-one: $c-light-blue;
+$c-accent-two: $c-steel-gray;
+$c-accent-three: $c-ultra-light-blue;
+
+$c-button-base: $c-light-gray;
+$c-button-base-text: $c-near-white;
+$c-button-primary: $c-bright-blue;
+
+$c-base-route-cover: lighten($c-accent-two, 10%);

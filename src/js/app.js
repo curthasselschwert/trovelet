@@ -1,5 +1,5 @@
-/** @jsx React.DOM */
-var React  = require('react');
+require('../scss/app.scss');
+
 var Parse  = require('parse');
 var router = require('./router');
 

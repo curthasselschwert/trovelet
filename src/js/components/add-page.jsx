@@ -65,7 +65,7 @@ var AddPage = React.createClass({
       <div className="add-page">
         <div className="message error">{ this.state.error.message }</div>
         <form className="form" action="/" onSubmit={ this.handleSubmit }>
-          <input type="text" ref="url"  enabled={ this.enabled() } placeholder="Enter a link" />
+          <input type="text" ref="url"  enabled={ this.enabled() } placeholder="http://example.com" />
           <button type="submit" enabled={ this.enabled() }>Add Link</button>
         </form>
       </div>

@@ -1,0 +1,15 @@
+@import 'base/all';
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 16px;
+}
+
+a, a:link, a:visited, a:hover {
+  color: hsl(203, 100%, 46%);
+  text-decoration: none;
+}
