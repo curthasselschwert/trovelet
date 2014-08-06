@@ -8,7 +8,8 @@ var simple        = require('./lib/simple');
 var screenshot    = require('./lib/screenshot');
 var app           = express();
 
-var LOGFMT = app.get('env') === 'development' ? 'dev' : 'combined';
+var DEV    = (app.get('env') === 'development')
+var LOGFMT = DEV ? 'dev' : 'combined';
 var PORT   = process.env.PORT || 3000;
 
 app.use(morgan(LOGFMT));
@@ -30,10 +31,9 @@ app.get('/notfound', function(req, res) {
 app.get(/\/info\/(.+)/, info);
 app.get('/screenshot/:id', screenshot);
 
-if (app.get('env') === 'development') {
+if (DEV) {
   app.get(/.*\.js(on)?$/, function(req, res) {
     var path = 'http://localhost:3001' + req.path;
-    console.log('Redirect', path);
     res.redirect(301, path);
   });
 }
@@ -44,26 +44,8 @@ app.get('/:handle', function(req, res) {
 
 app.use(express.static(__dirname + '/dist'));
 
-//var server = http.createServer(function(request, response) {
-//  var match = paramify(request.url);
-//
-//  console.log(new Date(), '[request]', request.method, request.url);
-//
-//  if (match('/simple/*')) {
-//    return simple(match.params[0], response);
-//  }
-//
-//  if (match('/screenshot/:id')) {
-//    return screenshot(match.params.id, response);
-//  }
-//
-//  response.statusCode = 404;
-//  response.end('{}');
-//});
-
-
 // Load webpack dev server in development
-if (app.get('env') == 'development') {
+if (DEV) {
   var webpackServer = require('./lib/webpack-server');
 
   webpackServer.listen(3001, 'localhost', function() {
