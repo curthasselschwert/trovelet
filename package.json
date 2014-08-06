@@ -1,4 +1,11 @@
 {
+  "scripts": {
+    "start": "server.js",
+    "postinstall": "gulp build"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
   "dependencies": {
     "webpack": "^1.3.2-beta9",
     "jsx-loader": "^0.11.0",

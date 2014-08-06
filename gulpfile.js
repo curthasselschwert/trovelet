@@ -15,7 +15,7 @@ gulp.task('scss', function() {
     .pipe(plugins.sass())
     .pipe(plugins.autoprefixer('last 3 versions'))
     .pipe(plugins.minifyCss())
-    .pipe(gulp.dest('dist/assets/css'));
+    .pipe(gulp.dest('dist/assets'));
 });
 
 gulp.task("html", function() {
@@ -40,6 +40,9 @@ gulp.task('dev', ['server', 'html', 'images', 'scss'], function() {
 });
 
 gulp.task("webpack:build", function(callback) {
+  // TODO: Not sure how to disable the dev server entry points
+  webpackConfig.entry = ['./src/js/app'];
+
   // modify some webpack config options
   var config = Object.create(webpackConfig);
 

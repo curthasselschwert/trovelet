@@ -5,8 +5,8 @@ var webpack       = require('webpack');
 var cors          = require('cors');
 var info          = require('./lib/info');
 var simple        = require('./lib/simple');
+var screenshot    = require('./lib/screenshot');
 var app           = express();
-var request       = require('request');
 
 var LOGFMT = app.get('env') === 'development' ? 'dev' : 'combined';
 var PORT   = process.env.PORT || 3000;
@@ -27,6 +27,9 @@ app.get('/notfound', function(req, res) {
   res.sendFile(__dirname + '/dist/404.html');
 });
 
+app.get(/\/info\/(.+)/, info);
+app.get('/screenshot/:id', screenshot);
+
 if (app.get('env') === 'development') {
   app.get(/.*\.js(on)?$/, function(req, res) {
     var path = 'http://localhost:3001' + req.path;
@@ -45,26 +48,6 @@ app.use(express.static(__dirname + '/dist'));
 //  var match = paramify(request.url);
 //
 //  console.log(new Date(), '[request]', request.method, request.url);
-//
-//  if (match('/')) {
-//    return html('index', response);
-//  }
-//
-//  if (match('/login')) {
-//    return html('app', response);
-//  }
-//
-//  if (match('/signup')) {
-//    return html('app', response);
-//  }
-//
-//  if (match('/me')) {
-//    return html('app', response);
-//  }
-//
-//  if (match('/info/*')) {
-//    return info(match.params[0], response);
-//  }
 //
 //  if (match('/simple/*')) {
 //    return simple(match.params[0], response);
