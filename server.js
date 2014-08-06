@@ -5,15 +5,14 @@ var webpack       = require('webpack');
 var cors          = require('cors');
 var info          = require('./lib/info');
 var simple        = require('./lib/simple');
-var screenshot    = require('./lib/screenshot');
 var app           = express();
+var request       = require('request');
 
 var LOGFMT = app.get('env') === 'development' ? 'dev' : 'combined';
 var PORT   = process.env.PORT || 3000;
 
 app.use(morgan(LOGFMT));
 app.use(cors());
-app.use(express.static(__dirname + '/dist'));
 app.use(compression());
 
 app.get('/login', function(req, res) {
@@ -28,18 +27,19 @@ app.get('/notfound', function(req, res) {
   res.sendFile(__dirname + '/dist/404.html');
 });
 
-// Redirect javasctript to webpack dev server in development
-app.get(/assets\/.*\.js(on)?$/, function(req, res) {
-  if (app.get('env') == 'development') {
-    res.redirect(301, 'http://localhost:3001' + req.path);
-  } else {
-    res.sendFile(__dirname + '/dist' + req.path);
-  }
-});
+if (app.get('env') === 'development') {
+  app.get(/.*\.js(on)?$/, function(req, res) {
+    var path = 'http://localhost:3001' + req.path;
+    console.log('Redirect', path);
+    res.redirect(301, path);
+  });
+}
 
 app.get('/:handle', function(req, res) {
   res.sendFile(__dirname + '/dist/app.html');
 });
+
+app.use(express.static(__dirname + '/dist'));
 
 //var server = http.createServer(function(request, response) {
 //  var match = paramify(request.url);
@@ -79,6 +79,7 @@ app.get('/:handle', function(req, res) {
 //});
 
 
+// Load webpack dev server in development
 if (app.get('env') == 'development') {
   var webpackServer = require('./lib/webpack-server');
 

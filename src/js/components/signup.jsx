@@ -53,7 +53,7 @@ var Signup = React.createClass({
           <button className="submit" type="submit">Sign Up</button>
         </form>
         <p className="message">
-          Already have an account? Login <span onClick={ this.login }>here.</span>
+          Already have an account? Login <a href="/login">here</a>.
         </p>
       </div>
     );

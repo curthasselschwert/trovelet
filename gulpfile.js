@@ -23,6 +23,22 @@ gulp.task("html", function() {
            .pipe(gulp.dest('dist'));
 });
 
+gulp.task('server', function() {
+  plugins.nodemon({ script: 'server.js', ext: 'js', ignore: ['src/**/*', 'dist/**/*'] })
+    .on('restart', function(files) {
+      gutil.log('[nodemon]', 'nodemon reloading...', files)
+    })
+    .on('crash', function() {
+      gutil.log('[nodemon]', 'nodemon crashed...')
+    });
+});
+
+gulp.task('dev', ['server', 'html', 'images', 'scss'], function() {
+  gulp.watch('src/images/**/*', ['images']);
+  gulp.watch('src/html/**/*', ['html']);
+  gulp.watch('src/scss/app.scss', ['scss']);
+});
+
 gulp.task("webpack:build", function(callback) {
   // modify some webpack config options
   var config = Object.create(webpackConfig);
