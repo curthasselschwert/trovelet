@@ -9,7 +9,13 @@ var moment     = require('moment');
 var PagesList = React.createClass({
 
   getInitialState: function() {
-    return { pageIds: [], error: {}, limit: 10, count: 0, page: 1 };
+    return {
+      pageIds: [],
+      error: {},
+      limit: 10,
+      count: 0,
+      page: 1
+    };
   },
 
   componentDidMount: function() {

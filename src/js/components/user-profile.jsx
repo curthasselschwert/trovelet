@@ -25,7 +25,7 @@ var UserProfile = React.createClass({
   },
 
   error: function(error) {
-    console.error(error);
+    window.location = '/notfound';
   },
 
   addPage: function() {

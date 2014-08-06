@@ -44,7 +44,7 @@ var Signup = React.createClass({
           <div className="error">{ this.state.error }</div>
           <input className="email" type="text" ref="email" placeholder="email" />
           <input className="password" type="password" ref="password" placeholder="password" />
-          <button className="submit" type="submit">Login</button>
+          <button className="submit" type="submit">Hate</button>
         </form>
         <p className="message">
           Don't have an account? Sign up <span onClick={ this.signup }>here.</span>

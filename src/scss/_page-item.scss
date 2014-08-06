@@ -1,18 +1,24 @@
 .page-item {
-  background: hsl(0, 0, 98%);
+  background: hsl(0, 0, 99.5%);
   border-radius: 2px;
   box-shadow: 0 3px 3px hsla(0, 0, 0, .23), 0 3px 3px hsla(0, 0, 0, .16);
   box-sizing: border-box;
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  height: 270px;
   margin: 8px;
-  overflow: hidden;
   padding: 0 12px 12px;
   position: relative;
   top: 0;
-  transition: all .4s;
+  transform: scale(1);
+  transition: all .4s ease-out;
   width: 212px;
+
+  &.loading {
+    transform: scale(0);
+    transition: all .4s;
+  }
 
   &:hover {
     box-shadow: 0 6px 3px hsla(0, 0, 0, .23), 0 10px 10px hsla(0, 0, 0, .19);
@@ -20,10 +26,44 @@
     transition: all .4s;
   }
 
-  .image {
-    background: hsl(0, 0, 96%);
+  &:hover .preview .screenshot {
+    transform: translateY(-4px);
+  }
+
+  .preview {
+    background-image: linear-gradient(bottom, hsl(14, 18%, 68%) 0%, hsl(14, 18%, 74%) 20%, hsl(0, 0%, 90%) 100%);
+    border-bottom: 1px solid hsl(0, 0, 80%);
     height: 120px;
     margin: 0 -12px;
+    max-height: 120px;
+    overflow: hidden;
+    padding: 12px 12px 0;
+    position: relative;
+
+    &:after {
+      background-image: linear-gradient(bottom, hsla(0, 0, 0, .12) 10%, transparent);
+      bottom: 0;
+      content: '';
+      display: block;
+      height: 16px;
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
+
+    .screenshot {
+      box-shadow: 0 3px 3px hsla(0, 0, 0, .23), 0 3px 3px hsla(0, 0, 0, .16);
+      display: block;
+      position: relative;
+      transform: translateY(0);
+      transition: all .3s;
+      width: 100%;
+    }
+
+    .screenshot.loading {
+      transform: translateY(200px);
+      transition: all .3s;
+    }
   }
 
   .title {
@@ -37,10 +77,6 @@
     max-height: 32px;
     overflow: hidden;
     text-transform: capitalize;
-  }
-
-  .title.loading {
-    background: hsl(0, 0, 90%);
   }
 
   .summary {

@@ -3,14 +3,14 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
-    "webpack-dev-server/client?http://localhost:8080",
+    "webpack-dev-server/client?http://localhost:3001",
     "webpack/hot/dev-server",
     "./src/js/app"
   ],
   output: {
-    path: __dirname + "/dist/assets",
+    path: __dirname + "/dist/assets/",
     filename: "bundle.js",
-    publicPath: "/assets"
+    publicPath: "/assets/"
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
