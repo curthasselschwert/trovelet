@@ -45,8 +45,9 @@ var UserProfile = React.createClass({
     if (user.id) {
       return (
         <div className="user-profile">
-          { user.get('email') }
-          { this.addPage() }
+          <div className="user-info">
+            { user.get('name') }
+          </div>
           <PagesList user={ user } />
         </div>
       );

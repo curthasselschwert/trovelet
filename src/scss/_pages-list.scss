@@ -1,4 +1,63 @@
 .pages-list {
   display: flex;
-  flex-wrap: wrap;
+  flex: 1;
+  flex-direction: column;
+
+  .add-page {
+    align-items: center;
+    display: flex;
+  }
+
+  .pages {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-y: scroll;
+    padding: 32px;
+  }
+
+  .pagination {
+    align-items: center;
+    display: flex;
+    padding: 12px;
+    position: relative;
+
+    &:before {
+      background-image: linear-gradient(bottom, hsl(0, 0, 93%), transparent);
+      content: '';
+      display: block;
+      height: 32px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: -32px;
+    }
+
+    .nav {
+      cursor: pointer;
+      height: 32px;
+      transition: all .3s;
+      width: 32px;
+    }
+
+    .next {
+      margin-left: auto;
+      transition: all .3s;
+
+      &:hover {
+        transform: translateX(4px);
+      }
+    }
+
+    .prev {
+      margin-right: auto;
+      transform: rotate(180deg);
+      transition: all .3s;
+
+      &:hover {
+        transform: rotate(180deg) translateX(4px);
+      }
+    }
+  }
 }

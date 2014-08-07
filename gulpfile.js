@@ -36,7 +36,7 @@ gulp.task('server', function() {
 gulp.task('dev', ['server', 'html', 'images', 'scss'], function() {
   gulp.watch('src/images/**/*', ['images']);
   gulp.watch('src/html/**/*', ['html']);
-  gulp.watch('src/scss/app.scss', ['scss']);
+  gulp.watch('src/scss/**/*', ['scss']);
 });
 
 gulp.task("webpack:build", function(callback) {

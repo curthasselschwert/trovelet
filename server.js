@@ -3,6 +3,7 @@ var compression   = require('compression');
 var morgan        = require('morgan');
 var webpack       = require('webpack');
 var cors          = require('cors');
+var bodyParser    = require('body-parser');
 var info          = require('./lib/info');
 var simple        = require('./lib/simple');
 var screenshot    = require('./lib/screenshot');
@@ -15,6 +16,11 @@ var PORT   = process.env.PORT || 3000;
 app.use(morgan(LOGFMT));
 app.use(cors());
 app.use(compression());
+app.use(bodyParser());
+
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/dist/app.html');
+});
 
 app.get('/login', function(req, res) {
   res.sendFile(__dirname + '/dist/app.html');
@@ -28,7 +34,7 @@ app.get('/notfound', function(req, res) {
   res.sendFile(__dirname + '/dist/404.html');
 });
 
-app.get(/\/info\/(.+)/, info);
+app.post('/info', info);
 app.get('/screenshot/:id', screenshot);
 
 if (DEV) {

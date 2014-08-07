@@ -1,20 +1,39 @@
 @import 'base/all';
+@import 'user-profile';
+@import 'add-page';
 @import 'pages-list';
 @import 'page-item';
 
 html, body {
   background: hsl(0, 0, 93%);
+  height: 100%;
   margin: 0;
   padding: 0;
 }
 
 body {
   font-size: 16px;
-  line-height: 16px;
-  padding: 16px;
+  line-height: 1.5rem;
 }
 
 a, a:link, a:visited, a:hover {
   color: hsl(203, 100%, 46%);
   text-decoration: none;
+}
+
+.application {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-height: 100vh;
+
+  #masthead {
+    height: 48px;
+  }
+
+  #content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
 }

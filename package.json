@@ -39,6 +39,8 @@
     "morgan": "^1.2.2",
     "webpack-dev-middleware": "^1.0.10",
     "gulp-nodemon": "^1.0.4",
-    "browser-request": "^0.3.2"
+    "browser-request": "^0.3.2",
+    "react-inlinesvg": "^0.2.2",
+    "body-parser": "^1.6.1"
   }
 }

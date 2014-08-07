@@ -1,0 +1,143 @@
+@keyframes pulsate {
+  0% {
+    transform: scale(.1);
+    opacity: 0.0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+.add-page {
+  border: 1px dashed hsl(0, 0%, 80%);
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: flex;
+  height: 270px;
+  margin: 8px;
+  padding: 0 12px 12px;
+  position: relative;
+  text-align: center;
+  transition: all .4s;
+  width: 212px;
+
+  &.active {
+    background: hsl(0, 0, 99.5%);
+    border: none;
+    box-shadow: 0 3px 3px hsla(0, 0, 0, .23), 0 3px 3px hsla(0, 0, 0, .16);
+  }
+
+  .loader {
+    animation: pulsate 1s ease-out;
+    animation-iteration-count: infinite;
+    border: 3px solid hsl(0, 0, 80%);
+    border-radius: 50%;
+    display: none;
+    height: 30px;
+    margin: auto;
+    opacity: 0;
+    width: 30px;
+  }
+
+  &.active.loading .loader {
+    display: block;
+  }
+
+  .close {
+    border-radius: 50%;
+    color: hsl(0, 0, 50%);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    height: 24px;
+    line-height: 20px;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    transition: all .4s;
+    width: 24px;
+
+    &:hover {
+      background: hsl(0, 0, 40%);
+      color: hsl(0, 0, 99%);
+      transition: all .4s;
+    }
+  }
+
+  .add {
+    background: hsl(0, 0%, 83%);
+    border-radius: 50%;
+    color: hsl(0, 0%, 93%);
+    cursor: pointer;
+    font-size: 56px;
+    font-weight: 600;
+    height: 48px;
+    line-height: 44px;
+    margin: auto;
+    text-align: center;
+    transition: all .3s;
+    width: 48px;
+
+    &:hover {
+      background: hsl(0, 0%, 78%);
+      transition: all .3s;
+    }
+  }
+
+  &.active .add {
+    display: none;
+  }
+
+  .message {
+    font-size: 15px;
+    line-height: 18px;
+    margin: 28px 0 0;
+    max-height: 4 * 18px;
+    min-height: 4 * 18px;
+    overflow: hidden;
+
+    &.error {
+      color: hsl(333, 85%, 42%);
+    }
+  }
+
+  .url {
+    border: none;
+    border-bottom: 1px solid hsl(0, 0, 70%);
+    margin: 36px 0 16px;
+    outline: 0;
+    text-align: center;
+  }
+
+  .save {
+    background: hsl(97, 81%, 48%);
+    border: none;
+    border-radius: 3px;
+    color: hsl(0, 0, 98%);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 32px;
+    outline: 0;
+    transition: all .2s;
+
+    &:hover {
+      background: hsl(97, 81%, 50%);
+      transition: all .2s;
+    }
+  }
+
+  .form,
+  &.active.loading .form {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  &.active .form {
+    display: flex;
+  }
+}

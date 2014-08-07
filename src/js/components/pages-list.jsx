@@ -2,6 +2,7 @@
 var React      = require('react');
 var Parse      = require('parse');
 var PageItem   = require('./page-item');
+var AddPage    = require('./add-page');
 var emitter    = require('../emitter');
 var url        = require('url');
 var moment     = require('moment');
@@ -21,7 +22,11 @@ var PagesList = React.createClass({
   componentDidMount: function() {
     emitter.on('page added', this.pageAdded);
     emitter.on('page deleted', this.updateList);
-    this.updateList();
+
+    var width = this.refs.pages.getDOMNode().getBoundingClientRect().width;
+    var limit = Math.floor(width / 228) * 5;
+
+    this.setState({ limit: limit }, this.updateList);
   },
 
   getPages: function() {
@@ -82,11 +87,7 @@ var PagesList = React.createClass({
     var next = this.state.page + 1;
 
     if (more) {
-      return (
-        <div className="pagination next" onClick={ this.setPage.bind(this, next) }>
-          Next
-        </div>
-      )
+      return <img src="/assets/images/nav-arrow.svg" className="nav next" onClick={ this.setPage.bind(this, next) } />;
     }
   },
 
@@ -95,11 +96,7 @@ var PagesList = React.createClass({
     var prev = this.state.page - 1;
 
     if (more) {
-      return (
-        <div className="pagination prev" onClick={ this.setPage.bind(this, prev) }>
-          Prev
-        </div>
-      )
+      return <img src="/assets/images/nav-arrow.svg" className="nav prev" onClick={ this.setPage.bind(this, prev) } />;
     }
   },
 
@@ -109,10 +106,26 @@ var PagesList = React.createClass({
     });
   },
 
+  addPage: function() {
+    var user    = this.props.user;
+    var current = Parse.User.current();
+
+    if (user.id === current.id && this.state.page === 1) {
+      return <AddPage />;
+    }
+
+    return null;
+  },
+
   render: function() {
     return (
       <div className="pages-list">
-        { this.pages() }
+        <div className="page-tools">
+        </div>
+        <div ref="pages" className="pages">
+          { this.addPage() }
+          { this.pages() }
+        </div>
         <div className="pagination">
           { this.prevPage() }
           { this.nextPage() }

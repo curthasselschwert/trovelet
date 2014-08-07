@@ -1,0 +1,11 @@
+.user-profile {
+  display: flex;
+  flex: 1;
+
+  .user-info {
+    box-sizing: border-box;
+    padding: 16px;
+    text-align: center;
+    width: 240px;
+  }
+}
