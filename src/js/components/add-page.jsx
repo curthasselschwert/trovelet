@@ -18,7 +18,7 @@ var AddPage = React.createClass({
   },
 
   deactivate: function() {
-    this.setState({ active: false, loading: false });
+    this.setState({ error: false, message: msg, active: false, loading: false });
   },
 
   handleSubmit: function(e) {
