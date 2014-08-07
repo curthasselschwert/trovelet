@@ -97,7 +97,7 @@ var AddPage = React.createClass({
         <form className="form" action="/" onSubmit={ this.handleSubmit }>
           <div className="close" onClick={ this.deactivate }>x</div>
           <div className={ msgcn }>{ this.state.message }</div>
-          <input type="text" autoFocus className="url" ref="url" placeholder="example.com" />
+          <input type="text" autoFocus className="url" ref="url" placeholder="Paste address here" />
           <button type="submit" className="save">Save</button>
         </form>
       </div>
