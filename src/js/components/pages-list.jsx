@@ -13,7 +13,7 @@ var PagesList = React.createClass({
     return {
       pageIds: [],
       error: {},
-      limit: 25,
+      limit: 50,
       count: 0,
       page: 1
     };
