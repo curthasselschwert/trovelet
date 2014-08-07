@@ -13,7 +13,7 @@ var PagesList = React.createClass({
     return {
       pageIds: [],
       error: {},
-      limit: 10,
+      limit: 25,
       count: 0,
       page: 1
     };
@@ -23,10 +23,7 @@ var PagesList = React.createClass({
     emitter.on('page added', this.pageAdded);
     emitter.on('page deleted', this.updateList);
 
-    var width = this.refs.pages.getDOMNode().getBoundingClientRect().width;
-    var limit = Math.floor(width / 228) * 5;
-
-    this.setState({ limit: limit }, this.updateList);
+    this.updateList();
   },
 
   getPages: function() {
