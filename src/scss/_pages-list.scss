@@ -9,11 +9,9 @@
   }
 
   .pages {
-    display: flex;
     flex: 1;
-    flex-wrap: wrap;
-    justify-content: center;
     overflow-y: scroll;
+    margin: 0 auto;
     padding: 32px;
   }
 
