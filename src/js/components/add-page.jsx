@@ -3,7 +3,7 @@ var React   = require('react');
 var Parse   = require('parse');
 var request = require('browser-request');
 var emitter = require('../emitter');
-var msg     = "Enter the address of the page you would like to add.";
+var msg     = "Copy a web page address and paste it below.";
 
 var AddPage = React.createClass({
 

@@ -1,5 +1,5 @@
 .page-item {
-  background: hsl(0, 0, 99.5%);
+  background: hsl(0, 0, 98%);
   border-radius: 2px;
   box-shadow: 0 3px 3px hsla(0, 0, 0, .23), 0 3px 3px hsla(0, 0, 0, .16);
   box-sizing: border-box;
@@ -8,13 +8,14 @@
   flex-direction: column;
   float: left;
   height: 270px;
-  margin: 8px;
+  margin: 12px;
   padding: 0 12px 12px;
   position: relative;
   top: 0;
   transform: scale(1);
   transition: all .4s ease-out;
   width: 212px;
+  z-index: 0;
 
   &.loading {
     transform: scale(0);
@@ -27,57 +28,58 @@
     transition: all .4s;
   }
 
-  &:hover .preview .screenshot {
-    transform: translateY(-4px);
+  &:hover .preview {
+    transform: translateY(-8px);
+    transition: all .3s;
   }
 
   .preview {
-    background-image: linear-gradient(bottom, hsl(14, 18%, 68%) 0%, hsl(14, 18%, 74%) 20%, hsl(0, 0%, 90%) 100%);
-    border-bottom: 1px solid hsl(0, 0, 80%);
-    height: 120px;
-    margin: 0 -12px;
-    max-height: 120px;
-    overflow: hidden;
-    padding: 12px 12px 0;
-    position: relative;
+    bottom: 0;
+    clip: rect(0, auto, 270px, 0);
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: all .3s;
 
-    &:after {
-      background-image: linear-gradient(bottom, hsla(0, 0, 0, .12) 10%, transparent);
-      bottom: 0;
-      content: '';
-      display: block;
-      height: 16px;
-      left: 0;
-      position: absolute;
-      width: 100%;
+    &.loading {
+      clip: rect(0, auto, 100px, 0);
+      transform: translateY(133px);
     }
 
     .screenshot {
+      border-radius: 2px;
       box-shadow: 0 3px 3px hsla(0, 0, 0, .23), 0 3px 3px hsla(0, 0, 0, .16);
       display: block;
       position: relative;
-      transform: translateY(0);
-      transition: all .3s;
       width: 100%;
-    }
-
-    .screenshot.loading {
-      transform: translateY(200px);
-      transition: all .3s;
     }
   }
 
+  .page-meta {
+    align-items: center;
+    background: hsl(0, 0, 96%);
+    border-top: 1px solid hsl(0, 0, 88%);
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto -12px -12px;
+    padding: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
   .title {
-    color: hsl(203, 100%, 46%);
+    color: hsl(0, 0, 35%);
     display: block;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     height: 40px;
     line-height: 16px;
-    margin: 18px 0 6px;
+    margin: 0;
     max-height: 32px;
     overflow: hidden;
     text-transform: capitalize;
+    width: 100%;
   }
 
   .summary {
@@ -86,14 +88,35 @@
     font-weight: 300;
     line-height: 15px;
     height: 3 * 15px;
-    margin: 0 0 20px;
+    margin: 6px 0;
     max-height: 3 * 15px;
     overflow: hidden;
+    width: 100%;
   }
 
   .domain {
     color: hsl(0, 0, 68%);
     font-size: 12px;
-    margin: auto 0 0;
+    margin: 0 6px 0 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .delete {
+    display: block;
+    height: 12px;
+    margin: 0 -6px 0 auto;
+    padding: 6px;
+    opacity: .2;
+    transition: all .3s;
+    width: 12px;
+
+    &:hover {
+      height: 14px;
+      opacity: .55;
+      padding: 5px;
+      transition: all .3s;
+      width: 14px;
+    }
   }
 }

@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
-var React   = require('react');
-var Parse   = require('parse');
-var moment  = require('moment');
-var url     = require('url');
-var request = require('browser-request');
+var React      = require('react');
+var Parse      = require('parse');
+var DeletePage = require('./delete-page');
+var moment     = require('moment');
+var url        = require('url');
+var request    = require('browser-request');
 
 var PageItem = React.createClass({
 
@@ -21,6 +22,11 @@ var PageItem = React.createClass({
 
     query.get(id)
      .then(this.setPage);
+  },
+
+  openPage: function() {
+    var url = this.state.page.get('url');
+    window.open(url, '_blank');
   },
 
   setPage: function(page) {
@@ -50,20 +56,28 @@ var PageItem = React.createClass({
     var page = this.state.page;
 
     page.set('images', images);
-    this.setState({ page: page, imgLoading: false }, this.forceUpdate);
+    this.setState({ page: page });
   },
 
   imageLoad: function() {
-    this.setState({ imgLoading: false });
+    var timeout = Math.floor(Math.random() * 500) + 750;
+
+    console.log('Timeout', timeout);
+
+    setTimeout(this.setState.bind(this, { imgLoading: false }), timeout);
   },
 
   image: function() {
     var images  = this.state.page.get('images');
     var image   = images && images.small;
     var loading = this.state.imgLoading ? 'loading' : null;
-    var cname   = ['screenshot', loading].join(' ');
+    var cname   = ['preview', loading].join(' ');
 
-    return <img src={image} className={ cname } onLoad={ this.imageLoad } />
+    return (
+      <div className={ cname }>
+        <img src={image} className="screenshot" onLoad={ this.imageLoad } />
+      </div>
+    );
   },
 
   render: function() {
@@ -75,21 +89,21 @@ var PageItem = React.createClass({
     var loading = this.state.loading ? 'loading' : null;
     var cname   = ['page-item', loading].join(' ');
 
-
     return (
-      <div key={ this.props.key } className={ cname }>
-        <div className="preview">
-          { this.image() }
-        </div>
-        <a href={ link } target="_blank" className="title">
-          { page.get('title') }
-        </a>
-        <p className="summary">
-          { page.get('summary') }
-        </p>
-        <p className="domain">
-          { domain }
-        </p>
+      <div key={ this.props.key } className={ cname } onClick={ this.openPage }>
+        { this.image() }
+        <div className="page-meta">
+          <h2 className="title">
+            { page.get('title') }
+          </h2>
+          <p className="summary">
+            { page.get('summary') }
+          </p>
+          <p className="domain">
+            { domain }
+          </p>
+          <DeletePage page={ this.state.page } />
+       </div>
       </div>
     );
   }

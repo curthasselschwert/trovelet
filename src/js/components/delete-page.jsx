@@ -4,7 +4,8 @@ var emitter = require('../emitter');
 
 var DeletePage = React.createClass({
 
-  handleClick: function() {
+  handleClick: function(e) {
+    e.stopPropagation();
     var page = this.props.page;
 
     page.destroy()
@@ -20,7 +21,7 @@ var DeletePage = React.createClass({
   },
 
   render: function() {
-    return <div className="action delete" onClick={ this.handleClick }>Delete</div>;
+    return <img src="/assets/images/delete.svg" className="action delete" onClick={ this.handleClick } />;
   }
 
 });

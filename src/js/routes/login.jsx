@@ -12,7 +12,7 @@ module.exports = function(ctx) {
   } else {
     React.renderComponent(
       <Login />,
-      document.body
+      document.getElementById('content')
     );
   }
 }

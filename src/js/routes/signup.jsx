@@ -12,7 +12,7 @@ module.exports = function(ctx) {
   } else {
     React.renderComponent(
       <Signup />,
-      document.body
+      document.getElementById('content')
     );
   }
 }
