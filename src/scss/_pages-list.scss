@@ -15,46 +15,55 @@
     padding: 32px;
   }
 
+  .page-tools {
+    align-items: center;
+    display: flex;
+  }
+
   .pagination {
     align-items: center;
     display: flex;
+    margin-left: auto;
     padding: 12px;
-    position: relative;
 
-    &:before {
-      background-image: linear-gradient(bottom, hsl(0, 0, 93%), transparent);
-      content: '';
-      display: block;
-      height: 32px;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: -32px;
-    }
+    //&:before {
+    //  background-image: linear-gradient(bottom, hsl(0, 0, 93%), transparent);
+    //  content: '';
+    //  display: block;
+    //  height: 32px;
+    //  left: 0;
+    //  position: absolute;
+    //  right: 0;
+    //  top: -32px;
+    //}
 
     .nav {
-      cursor: pointer;
       height: 32px;
+      margin: 0 3px;
+      opacity: .2;
       transition: all .3s;
       width: 32px;
+
+      &.active {
+        cursor: pointer;
+        opacity: .8;
+      }
     }
 
     .next {
-      margin-left: auto;
       transition: all .3s;
 
-      &:hover {
-        transform: translateX(4px);
+      &.active:hover {
+        transform: translateX(3px);
       }
     }
 
     .prev {
-      margin-right: auto;
       transform: rotate(180deg);
       transition: all .3s;
 
-      &:hover {
-        transform: rotate(180deg) translateX(4px);
+      &.active:hover {
+        transform: rotate(180deg) translateX(3px);
       }
     }
   }

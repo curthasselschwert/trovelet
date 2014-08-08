@@ -46,7 +46,8 @@ var UserProfile = React.createClass({
       return (
         <div className="user-profile">
           <div className="user-info">
-            { user.get('name') }
+            <div className="profile-image" />
+            <div className="name">{ user.get('name') }</div>
           </div>
           <PagesList user={ user } />
         </div>

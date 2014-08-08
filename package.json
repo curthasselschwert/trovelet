@@ -41,6 +41,7 @@
     "gulp-nodemon": "^1.0.4",
     "browser-request": "^0.3.2",
     "react-inlinesvg": "^0.2.2",
-    "body-parser": "^1.6.1"
+    "body-parser": "^1.6.1",
+    "orchestrate": "^0.3.3"
   }
 }

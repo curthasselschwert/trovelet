@@ -72,8 +72,9 @@ var AddPage = React.createClass({
 
      page.set('url', info.url);
      page.set('title', info.title);
-     page.set('summary', info.description);
-     page.set('text', info.text);
+     page.set('summary', info.summary);
+     page.set('entities', info.entities);
+     page.set('keywords', info.keywords);
      page.set('user', user);
 
      return page.save();

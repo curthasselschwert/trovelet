@@ -13,7 +13,7 @@ var PagesList = React.createClass({
     return {
       pageIds: [],
       error: {},
-      limit: 50,
+      limit: 5,
       count: 0,
       page: 1
     };
@@ -80,21 +80,23 @@ var PagesList = React.createClass({
   },
 
   nextPage: function() {
-    var more = this.state.page * this.state.limit < this.state.count;
-    var next = this.state.page + 1;
+    var more   = this.state.page * this.state.limit < this.state.count;
+    var next   = this.state.page + 1;
+    var active = more ? 'active' : null;
+    var cname  = ['nav', 'next', active].join(' ');
+    var action = active ? this.setPage.bind(this, next) : function() {};
 
-    if (more) {
-      return <img src="/assets/images/nav-arrow.svg" className="nav next" onClick={ this.setPage.bind(this, next) } />;
-    }
+    return <img src="/assets/images/nav-arrow.svg" className={ cname } onClick={ action } />;
   },
 
   prevPage: function() {
-    var more = this.state.page > 1;
-    var prev = this.state.page - 1;
+    var less   = this.state.page > 1;
+    var prev   = this.state.page - 1;
+    var active = less ? 'active' : null;
+    var cname  = ['nav', 'prev', active].join(' ');
+    var action = active ? this.setPage.bind(this, prev) : function() {};
 
-    if (more) {
-      return <img src="/assets/images/nav-arrow.svg" className="nav prev" onClick={ this.setPage.bind(this, prev) } />;
-    }
+    return <img src="/assets/images/nav-arrow.svg" className={ cname } onClick={ action } />;
   },
 
   pages: function() {
@@ -118,14 +120,14 @@ var PagesList = React.createClass({
     return (
       <div className="pages-list">
         <div className="page-tools">
+          <div className="pagination">
+            { this.prevPage() }
+            { this.nextPage() }
+          </div>
         </div>
         <div ref="pages" className="pages">
           { this.addPage() }
           { this.pages() }
-        </div>
-        <div className="pagination">
-          { this.prevPage() }
-          { this.nextPage() }
         </div>
       </div>
     )
