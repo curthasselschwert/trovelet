@@ -5,6 +5,7 @@ var webpack       = require('webpack');
 var cors          = require('cors');
 var bodyParser    = require('body-parser');
 var info          = require('./lib/info');
+var index         = require('./lib/index');
 var simple        = require('./lib/simple');
 var screenshot    = require('./lib/screenshot');
 var app           = express();
@@ -34,6 +35,7 @@ app.get('/notfound', function(req, res) {
   res.sendFile(__dirname + '/dist/404.html');
 });
 
+app.post('/index', index);
 app.post('/info', info);
 app.get('/screenshot/:id', screenshot);
 
