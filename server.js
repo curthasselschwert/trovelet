@@ -36,7 +36,7 @@ app.get('/notfound', function(req, res) {
 
 app.post('/index', index);
 app.post('/info', info);
-app.get('/screenshot/:id', screenshot);
+app.post('/screenshot', screenshot);
 
 if (DEV) {
   app.get(/.*\.js(on)?$/, function(req, res) {

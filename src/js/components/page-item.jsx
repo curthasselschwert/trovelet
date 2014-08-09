@@ -39,8 +39,12 @@ var PageItem = React.createClass({
     var id     = this.state.page.id;
     var self   = this;
     var opts   = {
-       url: 'http://trovelet.herokuapp.com/screenshot/' + id,
-       json: true
+       method: 'POST',
+       url: '/screenshot',
+       json: true,
+       body: {
+        url: this.state.page.get('url')
+       }
     };
 
     if (!image && id) {
