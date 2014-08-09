@@ -1,7 +1,6 @@
 var express       = require('express');
 var compression   = require('compression');
 var morgan        = require('morgan');
-var webpack       = require('webpack');
 var cors          = require('cors');
 var bodyParser    = require('body-parser');
 var info          = require('./lib/info');
@@ -16,7 +15,7 @@ var PORT   = process.env.PORT || 3000;
 
 app.use(morgan(LOGFMT));
 app.use(cors());
-//app.use(compression());
+app.use(compression());
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
