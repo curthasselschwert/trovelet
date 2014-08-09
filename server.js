@@ -16,8 +16,8 @@ var PORT   = process.env.PORT || 3000;
 
 app.use(morgan(LOGFMT));
 app.use(cors());
-app.use(compression());
-app.use(bodyParser());
+//app.use(compression());
+app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/dist/app.html');
