@@ -42,6 +42,7 @@
     "browser-request": "^0.3.2",
     "react-inlinesvg": "^0.2.2",
     "body-parser": "^1.6.1",
-    "orchestrate": "^0.3.3"
+    "orchestrate": "^0.3.3",
+    "memwatch": "^0.2.2"
   }
 }

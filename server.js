@@ -1,5 +1,6 @@
 var express       = require('express');
-var compression   = require('compression');
+//var compression   = require('compression');
+var memwatch      = require('memwatch');
 var morgan        = require('morgan');
 var cors          = require('cors');
 var bodyParser    = require('body-parser');
@@ -15,7 +16,7 @@ var PORT   = process.env.PORT || 3000;
 
 app.use(morgan(LOGFMT));
 app.use(cors());
-app.use(compression());
+//app.use(compression());
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
@@ -59,6 +60,16 @@ if (DEV) {
     console.info('Webpack dev server listening on 3001');
   });
 }
+
+memwatch.on('stats', function(stats) {
+  var current_base = stats.current_base;
+  var max = 500000000;
+
+  if (max - current_base < 0) {
+    console.error('Over memory limit. Exiting process.');
+    process.exit(1);
+  }
+});
 
 app.listen(PORT, function() {
   console.info('Server is listentng on ' + PORT);
