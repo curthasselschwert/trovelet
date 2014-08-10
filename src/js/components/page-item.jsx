@@ -64,9 +64,7 @@ var PageItem = React.createClass({
   },
 
   imageLoad: function() {
-    var timeout = Math.floor(Math.random() * 500) + 750;
-
-    console.log('Timeout', timeout);
+    var timeout = Math.floor(Math.random() * 500) + 500;
 
     setTimeout(this.setState.bind(this, { imgLoading: false }), timeout);
   },
