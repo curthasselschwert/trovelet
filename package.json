@@ -44,6 +44,7 @@
     "body-parser": "^1.6.1",
     "orchestrate": "^0.3.3",
     "memwatch": "^0.2.2",
-    "js-combinatorics": "^0.3.0"
+    "js-combinatorics": "^0.3.0",
+    "merge": "^1.1.3"
   }
 }
