@@ -61,14 +61,16 @@ if (DEV) {
   });
 }
 
-memwatch.on('stats', function(stats) {
-  var current_base = stats.current_base;
+memwatch.on('leak', function(info) {
   var max = 500000000;
+  //var current_base = stats.current_base;
 
-  if (max - current_base < 0) {
-    console.error('Over memory limit. Exiting process.');
-    process.exit(1);
-  }
+  console.log("Leak: ", info.growth / 1024 / 1024);
+
+  //if (max - current_base < 0) {
+  //  console.error('Over memory limit. Exiting process.');
+  //  process.exit(1);
+  //}
 });
 
 app.listen(PORT, function() {
