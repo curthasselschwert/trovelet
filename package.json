@@ -43,6 +43,7 @@
     "react-inlinesvg": "^0.2.2",
     "body-parser": "^1.6.1",
     "orchestrate": "^0.3.3",
-    "memwatch": "^0.2.2"
+    "memwatch": "^0.2.2",
+    "js-combinatorics": "^0.3.0"
   }
 }

@@ -8,6 +8,7 @@ var info          = require('./lib/info');
 var index         = require('./lib/index');
 var simple        = require('./lib/simple');
 var screenshot    = require('./lib/screenshot');
+var pageSearch    = require('./lib/page_search');
 var app           = express();
 
 var DEV    = (app.get('env') === 'development')
@@ -38,6 +39,7 @@ app.get('/notfound', function(req, res) {
 app.post('/index', index);
 app.post('/info', info);
 app.post('/screenshot', screenshot);
+app.get('/pages/search', pageSearch);
 
 if (DEV) {
   app.get(/.*\.js(on)?$/, function(req, res) {
