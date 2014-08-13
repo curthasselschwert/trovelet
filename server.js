@@ -31,6 +31,7 @@ app.get('/notfound', function(req, res) {
   res.sendFile(__dirname + '/dist/404.html');
 });
 
+app.get('/pages/search', page.search);
 app.post('/pages/info', page.info);
 app.post('/pages/screenshot', page.screenshot);
 app.post('/pages/index', page.index);
