@@ -57,10 +57,12 @@ var PageItem = React.createClass({
   },
 
   setImages: function(images) {
-    var page = this.state.page;
+    if (this.isMounted()) {
+      var page = this.state.page;
 
-    page.set('screenshots', images);
-    this.setState({ page: page });
+      page.set('screenshots', images);
+      this.setState({ page: page });
+    }
   },
 
   imageLoad: function() {
