@@ -1,14 +1,10 @@
 var express       = require('express');
-//var compression   = require('compression');
+var compression   = require('compression');
 var memwatch      = require('memwatch');
 var morgan        = require('morgan');
 var cors          = require('cors');
 var bodyParser    = require('body-parser');
-var info          = require('./lib/info');
-var index         = require('./lib/index');
-var simple        = require('./lib/simple');
-var screenshot    = require('./lib/screenshot');
-var pageSearch    = require('./lib/page_search');
+var page          = require('./lib/page');
 var app           = express();
 
 var DEV    = (app.get('env') === 'development')
@@ -17,7 +13,6 @@ var PORT   = process.env.PORT || 3000;
 
 app.use(morgan(LOGFMT));
 app.use(cors());
-//app.use(compression());
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
@@ -36,10 +31,8 @@ app.get('/notfound', function(req, res) {
   res.sendFile(__dirname + '/dist/404.html');
 });
 
-app.post('/index', index);
-app.post('/info', info);
-app.post('/screenshot', screenshot);
-app.get('/pages/search', pageSearch);
+app.post('/pages/info', page.info);
+app.post('/pages/screenshot', page.screenshot);
 
 if (DEV) {
   app.get(/.*\.js(on)?$/, function(req, res) {
@@ -53,6 +46,7 @@ app.get('/:handle', function(req, res) {
 });
 
 app.use(express.static(__dirname + '/dist'));
+app.use(compression());
 
 // Load webpack dev server in development
 if (DEV) {

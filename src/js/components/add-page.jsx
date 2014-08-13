@@ -48,7 +48,7 @@ var AddPage = React.createClass({
   getInfo: function(url) {
     var promise = new Parse.Promise();
     var options = {
-      url: '/info/',
+      url: '/pages/info',
       method: 'POST',
       json: true,
       body: {
@@ -70,12 +70,9 @@ var AddPage = React.createClass({
      var page = new Page();
      var user = this.state.user;
 
-     page.set('url', info.url);
-     page.set('title', info.title);
-     page.set('summary', info.summary);
-     page.set('entities', info.entities);
-     page.set('keywords', info.keywords);
-     page.set('user', user);
+     info.user = user;
+
+     page.set(info);
 
      return page.save();
   },

@@ -34,13 +34,13 @@ var PageItem = React.createClass({
   },
 
   getImages: function() {
-    var images = this.state.page.get('images');
+    var images = this.state.page.get('screenshots');
     var image  = images && images.small;
     var id     = this.state.page.id;
     var self   = this;
     var opts   = {
        method: 'POST',
-       url: '/screenshot',
+       url: '/pages/screenshot',
        json: true,
        body: {
         url: this.state.page.get('url')
@@ -59,7 +59,7 @@ var PageItem = React.createClass({
   setImages: function(images) {
     var page = this.state.page;
 
-    page.set('images', images);
+    page.set('screenshots', images);
     this.setState({ page: page });
   },
 
@@ -70,7 +70,7 @@ var PageItem = React.createClass({
   },
 
   image: function() {
-    var images  = this.state.page.get('images');
+    var images  = this.state.page.get('screenshots');
     var image   = images && images.small;
     var loading = this.state.imgLoading ? 'loading' : null;
     var cname   = ['preview', loading].join(' ');
@@ -87,7 +87,7 @@ var PageItem = React.createClass({
     var date    = page.updatedAt ? moment(page.updatedAt).calendar() : null;
     var link    = page.get('url');
     var domain  = link ? url.parse(link).hostname.replace('www.', '') : null;
-    var image   = this.state.page.get('images')
+    var image   = this.state.page.get('screenshots')
     var loading = this.state.loading ? 'loading' : null;
     var cname   = ['page-item', loading].join(' ');
 
