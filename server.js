@@ -33,6 +33,7 @@ app.get('/notfound', function(req, res) {
 
 app.post('/pages/info', page.info);
 app.post('/pages/screenshot', page.screenshot);
+app.post('/pages/index', page.index);
 
 if (DEV) {
   app.get(/.*\.js(on)?$/, function(req, res) {
