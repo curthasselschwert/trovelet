@@ -7,12 +7,14 @@ var emitter    = require('../emitter');
 var url        = require('url');
 var moment     = require('moment');
 var request    = require('browser-request');
+var debounce   = require('../debounce');
 
 var PagesList = React.createClass({
 
   getInitialState: function() {
     return {
       pages: [],
+      terms: [],
       error: {},
       api: 'http://trovelet.parseapp.com/pages/search?',
       limit: 5
@@ -31,6 +33,13 @@ var PagesList = React.createClass({
       url = this.state.api + ['userId=' + this.props.user.id, 'limit=' + this.state.limit].join('&');
     }
 
+    if (this.state.terms.length) {
+      var terms = this.state.terms.map(function(term) { return 'terms[]=' + term }).join('&');
+      url = [url, terms].join('&');
+    }
+
+    console.log('URL', url);
+
     var options = {
       url: url,
       json: true
@@ -47,6 +56,18 @@ var PagesList = React.createClass({
     }
 
     return this.setState(body);
+  },
+
+  search: function() {
+    var value = this.refs.search.getDOMNode().value;
+    var terms = [];
+
+    if (value && value.length > 0) {
+      var terms = value.split(/\s+/);
+    }
+
+    console.log('Terms', terms);
+    debounce(this, this.setState, { terms: terms }, this.getPages, 300);
   },
 
   nextPage: function() {
@@ -88,6 +109,7 @@ var PagesList = React.createClass({
     return (
       <div className="pages-list">
         <div className="page-tools">
+          <input type="text" ref="search" onChange={ this.search } placeholder="search" />
           <div className="pagination">
             { this.prevPage() }
             { this.nextPage() }
