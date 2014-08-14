@@ -1,13 +1,14 @@
 /** @jsx React.DOM */
-var React      = require('react');
-var Parse      = require('parse');
-var PageItem   = require('./page-item');
-var AddPage    = require('./add-page');
-var emitter    = require('../emitter');
-var url        = require('url');
-var moment     = require('moment');
-var request    = require('browser-request');
-var debounce   = require('../debounce');
+var React    = require('react');
+var Parse    = require('parse');
+var PageItem = require('./page-item');
+var AddPage  = require('./add-page');
+var emitter  = require('../emitter');
+var url      = require('url');
+var moment   = require('moment');
+var request  = require('browser-request');
+var debounce = require('../debounce');
+var isvg     = require('react-inlinesvg');
 
 var PagesList = React.createClass({
 
@@ -17,7 +18,7 @@ var PagesList = React.createClass({
       term: null,
       error: {},
       api: 'http://trovelet.parseapp.com/pages/search?',
-      per_page: 5
+      per_page: 8
     };
   },
 
@@ -31,14 +32,12 @@ var PagesList = React.createClass({
   getPages: function(url) {
     if (!url) {
       url = this.state.api + ['userId=' + this.props.user.id, 'per_page=' + this.state.per_page].join('&');
-    }
 
-    if (this.state.term) {
-      var term = 'term=' + this.state.term;
-      url = [url, term].join('&');
+      if (this.state.term) {
+        var term = 'term=' + this.state.term;
+        url = [url, term].join('&');
+      }
     }
-
-    console.log('URL', url);
 
     var options = {
       url: url,
@@ -93,19 +92,29 @@ var PagesList = React.createClass({
     var user    = this.props.user;
     var current = Parse.User.current();
 
-    if (user.id === current.id && this.state.page === 1) {
+    if (user.id === current.id && this.state.page === 1 && !this.state.term) {
       return <AddPage />;
     }
 
     return null;
   },
 
+  svgError: function(error) {
+    console.log('SVG Error', error);
+  },
+
   render: function() {
     return (
       <div className="pages-list">
         <div className="page-tools">
-          <input type="text" ref="search" onChange={ this.search } placeholder="search" />
+          <div className="search">
+            <isvg src="/assets/images/search.svg" />
+            <input className="term" type="text" ref="search" onChange={ this.search } placeholder="search" />
+          </div>
           <div className="pagination">
+            <div className="info">
+              Page { this.state.page } of { this.state.total_pages }
+            </div>
             { this.prevPage() }
             { this.nextPage() }
           </div>

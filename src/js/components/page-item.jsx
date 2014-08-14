@@ -84,6 +84,12 @@ var PageItem = React.createClass({
     );
   },
 
+  summary: function() {
+    var page = this.state.page;
+
+    return page.get('summary') || page.get('text');
+  },
+
   render: function() {
     var page    = this.state.page;
     var date    = page.updatedAt ? moment(page.updatedAt).calendar() : null;
@@ -101,7 +107,7 @@ var PageItem = React.createClass({
             { page.get('title') }
           </h2>
           <p className="summary">
-            { page.get('summary') }
+            { this.summary() }
           </p>
           <p className="domain">
             { domain }

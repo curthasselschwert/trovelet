@@ -11,13 +11,14 @@
   .pages {
     flex: 1;
     overflow-y: scroll;
-    margin: 0 auto;
+    margin: 0;
     padding: 32px;
   }
 
   .page-tools {
     align-items: center;
     display: flex;
+    padding: 0 32px 0 44px;
   }
 
   .pagination {
@@ -26,16 +27,10 @@
     margin-left: auto;
     padding: 12px;
 
-    //&:before {
-    //  background-image: linear-gradient(bottom, hsl(0, 0, 93%), transparent);
-    //  content: '';
-    //  display: block;
-    //  height: 32px;
-    //  left: 0;
-    //  position: absolute;
-    //  right: 0;
-    //  top: -32px;
-    //}
+    .info {
+      font-size: 14px;
+      margin: 0 12px 0 0;
+    }
 
     .nav {
       height: 32px;
@@ -52,19 +47,11 @@
 
     .next {
       transition: all .3s;
-
-      &.active:hover {
-        transform: translateX(3px);
-      }
     }
 
     .prev {
       transform: rotate(180deg);
       transition: all .3s;
-
-      &.active:hover {
-        transform: rotate(180deg) translateX(3px);
-      }
     }
   }
 }

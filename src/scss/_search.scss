@@ -1,0 +1,31 @@
+.search {
+  align-items: center;
+  display: flex;
+
+  .icon.search {
+    display: block;
+    height: 16px;
+    margin: 2px -18px 0 0;
+    opacity: .8;
+    width: 16px;
+
+    .shadow {
+      fill: hsl(0, 0, 35%);
+    }
+
+    .highlight {
+      opacity: 0;
+    }
+  }
+
+  .term {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid hsl(0, 0, 70%);
+    display: block;
+    line-height: 24px;
+    outline: 0;
+    padding: 2px 2px 2px 22px;
+    width: 248px;
+  }
+}
