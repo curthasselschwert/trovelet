@@ -14,10 +14,10 @@ var PagesList = React.createClass({
   getInitialState: function() {
     return {
       pages: [],
-      terms: [],
+      term: null,
       error: {},
       api: 'http://trovelet.parseapp.com/pages/search?',
-      limit: 5
+      per_page: 5
     };
   },
 
@@ -30,12 +30,12 @@ var PagesList = React.createClass({
 
   getPages: function(url) {
     if (!url) {
-      url = this.state.api + ['userId=' + this.props.user.id, 'limit=' + this.state.limit].join('&');
+      url = this.state.api + ['userId=' + this.props.user.id, 'per_page=' + this.state.per_page].join('&');
     }
 
-    if (this.state.terms.length) {
-      var terms = this.state.terms.map(function(term) { return 'terms[]=' + term }).join('&');
-      url = [url, terms].join('&');
+    if (this.state.term) {
+      var term = 'term=' + this.state.term;
+      url = [url, term].join('&');
     }
 
     console.log('URL', url);
@@ -60,14 +60,9 @@ var PagesList = React.createClass({
 
   search: function() {
     var value = this.refs.search.getDOMNode().value;
-    var terms = [];
 
-    if (value && value.length > 0) {
-      var terms = value.split(/\s+/);
-    }
-
-    console.log('Terms', terms);
-    debounce(this, this.setState, { terms: terms }, this.getPages, 300);
+    console.log('Term', value);
+    debounce(this, this.setState, { term: value }, this.getPages, 300);
   },
 
   nextPage: function() {
