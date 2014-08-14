@@ -35,6 +35,7 @@ app.get('/pages/search', page.search);
 app.post('/pages/info', page.info);
 app.post('/pages/screenshot', page.screenshot);
 app.post('/pages/index', page.index);
+app.del('/pages/:id', page.del);
 
 if (DEV) {
   app.get(/.*\.js(on)?$/, function(req, res) {
